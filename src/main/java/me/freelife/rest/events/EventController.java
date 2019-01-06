@@ -1,5 +1,6 @@
 package me.freelife.rest.events;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.hateoas.MediaTypes;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -17,12 +18,17 @@ public class EventController {
 
     private final EventRepository eventRepository;
 
-    public EventController(EventRepository eventRepository) {
+    private final ModelMapper modelMapper;
+
+    public EventController(EventRepository eventRepository, ModelMapper modelMapper) {
         this.eventRepository = eventRepository;
+        this.modelMapper = modelMapper;
     }
 
     @PostMapping
-    public ResponseEntity createEvent(@RequestBody Event event) {
+    public ResponseEntity createEvent(@RequestBody EventDto eventDto) {
+        //EventDto에 있는 것을 Event 타입의 인스턴스로 만들어 달라
+        Event event = modelMapper.map(eventDto, Event.class);
         Event newEvent = this.eventRepository.save(event);
         //EventController의 id에 해당하는 링크를 만들고 링크를 URI로 변환
         //API에 events에 어떤 특정한 ID 그 ID가 생성된 이벤트에 Location Header에 들어감
