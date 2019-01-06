@@ -33,11 +33,11 @@ public class EventController {
     @PostMapping
     public ResponseEntity createEvent(@RequestBody @Valid EventDto eventDto, Errors errors) {
         if(errors.hasErrors())
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.badRequest().body(errors);
 
         eventValidator.validate(eventDto, errors);
         if(errors.hasErrors()) {
-            return ResponseEntity.badRequest().build();
+            return ResponseEntity.badRequest().body(errors);
         }
 
         //EventDto에 있는 것을 Event 타입의 인스턴스로 만들어 달라
