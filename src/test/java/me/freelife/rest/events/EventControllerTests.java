@@ -1,15 +1,13 @@
 package me.freelife.rest.events;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import me.freelife.rest.common.TestDescription;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.hateoas.MediaTypes;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -33,7 +31,8 @@ public class EventControllerTests {
     @Autowired
     ObjectMapper objectMapper;
 
-    @Test //EventDto를 사용하여 값을 만든경우 잘동작함
+    @Test
+    @TestDescription("정상적으로 이벤트를 생성하는 테스트")
     public void createEvent() throws Exception {
         EventDto event = EventDto.builder()
                 .name("Spring")
@@ -64,7 +63,8 @@ public class EventControllerTests {
         ;
     }
 
-    @Test // Event를 사용해서 이상한 값들을 넣어주면 응답이 isBadRequest로 나오길 바람
+    @Test
+    @TestDescription("입력 받을 수 없는 값을 사용한 경우에 에러가 발생하는 테스트")
     public void createEvent_Bad_Request() throws Exception {
         Event event = Event.builder()
                 .id(100)
@@ -92,7 +92,8 @@ public class EventControllerTests {
         ;
     }
 
-    @Test //입력 데이터가 없는 경우 Bad_Request로 응답
+    @Test
+    @TestDescription("입력 값이 비어있는 경우에 에러가 발생하는 테스트")
     public void createEvent_Bad_Request_Empty_Input() throws Exception {
         EventDto eventDto = EventDto.builder().build();
 
@@ -103,7 +104,8 @@ public class EventControllerTests {
         ;
     }
 
-    @Test //입력 데이터가 이상한 경우 Bad_Request로 응답
+    @Test
+    @TestDescription("입력 값이 잘못된 경우에 에러가 발생하는 테스트")
     public void createEvent_Bad_Request_Wrong_Input() throws Exception {
         EventDto eventDto = EventDto.builder()
                 .name("Spring")
