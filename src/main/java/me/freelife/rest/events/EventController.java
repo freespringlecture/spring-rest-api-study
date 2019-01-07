@@ -2,12 +2,16 @@ package me.freelife.rest.events;
 
 import me.freelife.rest.common.ErrorsResource;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.MediaTypes;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,6 +35,12 @@ public class EventController {
         this.eventValidator = eventValidator;
     }
 
+    /**
+     * Event Create API
+     * @param eventDto
+     * @param errors
+     * @return
+     */
     @PostMapping
     public ResponseEntity createEvent(@RequestBody @Valid EventDto eventDto, Errors errors) {
         if(errors.hasErrors())
@@ -53,9 +63,24 @@ public class EventController {
         EventResource eventResource = new EventResource(event); //이벤트를 이벤트리소스로 변환
         eventResource.add(linkTo(EventController.class).withRel("query-events"));
         eventResource.add(selfLinkBuilder.withRel("update-event")); // 셀프 링크와 메서드는 같지만 사용하는 메서드만 다름
-        eventResource.add(new Link("/docs/index.html").withRel("profile"));
+        eventResource.add(new Link("/docs/index.html#resources-events-create").withRel("profile"));
         // createdUri 헤더를 가지고 201응답을 만듬
         return ResponseEntity.created(createdUri).body(eventResource);
+    }
+
+    /**
+     * Event List Select API
+     * @param pageable
+     * @param assembler
+     * @return
+     */
+    @GetMapping
+    public ResponseEntity queryEvents(Pageable pageable, PagedResourcesAssembler<Event> assembler) {
+        Page<Event> page = this.eventRepository.findAll(pageable);
+        var pagedResources = assembler.toResource(page, e -> new EventResource(e));
+        //profile로 가는 Link를 추가
+        pagedResources.add(new Link("/docs/index.html#resources-events-list").withRel("profile"));
+        return ResponseEntity.ok(pagedResources);
     }
 
     private ResponseEntity badRequest(Errors errors) {
