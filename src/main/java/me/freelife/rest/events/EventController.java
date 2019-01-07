@@ -1,6 +1,7 @@
 package me.freelife.rest.events;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.hateoas.Link;
 import org.springframework.hateoas.MediaTypes;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.http.ResponseEntity;
@@ -53,6 +54,7 @@ public class EventController {
         EventResource eventResource = new EventResource(event); //이벤트를 이벤트리소스로 변환
         eventResource.add(linkTo(EventController.class).withRel("query-events"));
         eventResource.add(selfLinkBuilder.withRel("update-event")); // 셀프 링크와 메서드는 같지만 사용하는 메서드만 다름
+        eventResource.add(new Link("/docs/index.html").withRel("profile"));
         // createdUri 헤더를 가지고 201응답을 만듬
         return ResponseEntity.created(createdUri).body(eventResource);
     }

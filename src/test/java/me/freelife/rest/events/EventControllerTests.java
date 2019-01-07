@@ -69,14 +69,12 @@ public class EventControllerTests {
                 .andExpect(jsonPath("free").value(false)) // free가 false
                 .andExpect(jsonPath("offline").value(true))
                 .andExpect(jsonPath("eventStatus").value(EventStatus.DRAFT.name()))
-                .andExpect(jsonPath("_links.self").exists())
-                .andExpect(jsonPath("_links.query-events").exists())
-                .andExpect(jsonPath("_links.update-event").exists())
-                .andDo(document("create-event", //문서 이름
+                .andDo(document("create-event",
                         links(  //링크 문서화
                                 linkWithRel("self").description("link to self"),
                                 linkWithRel("query-events").description("link to query events"),
-                                linkWithRel("update-event").description("link to update an existing event")
+                                linkWithRel("update-event").description("link to update an existing event"),
+                                linkWithRel("profile").description("link to update an existing event")
                         ),
                         requestHeaders( //요청 헤더 문서화
                                 headerWithName(HttpHeaders.ACCEPT).description("accept header"),
@@ -100,6 +98,7 @@ public class EventControllerTests {
                         ),
                         responseFields( //응답 본문 문서화
                                 fieldWithPath("id").description("identifier of new event"),
+                                fieldWithPath("name").description("Name of new event"),
                                 fieldWithPath("description").description("date time of begin of new event"),
                                 fieldWithPath("beginEnrollmentDateTime").description("date time of begin of new event"),
                                 fieldWithPath("closeEnrollmentDateTime").description("date time of close of new event"),
@@ -114,7 +113,8 @@ public class EventControllerTests {
                                 fieldWithPath("eventStatus").description("event status"),
                                 fieldWithPath("_links.self.href").description("link to self"),
                                 fieldWithPath("_links.query-events.href").description("link to query events list"),
-                                fieldWithPath("_links.update-event.href").description("link to update an existing event")
+                                fieldWithPath("_links.update-event.href").description("link to update an existing event"),
+                                fieldWithPath("_links.profile.href").description("link to profile")
                         )
                 ))
 
