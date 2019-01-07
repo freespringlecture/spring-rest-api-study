@@ -2,6 +2,7 @@ package me.freelife.rest.events;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.hateoas.MediaTypes;
+import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
@@ -47,9 +48,12 @@ public class EventController {
         Event newEvent = this.eventRepository.save(event);
         //EventController의 id에 해당하는 링크를 만들고 링크를 URI로 변환
         //API에 events에 어떤 특정한 ID 그 ID가 생성된 이벤트에 Location Header에 들어감
-        URI createdUri = linkTo(EventController.class).slash(newEvent.getId()).toUri();
-        event.setId(10);
+        ControllerLinkBuilder selfLinkBuilder = linkTo(EventController.class).slash(newEvent.getId());
+        URI createdUri = selfLinkBuilder.toUri();
+        EventResource eventResource = new EventResource(event); //이벤트를 이벤트리소스로 변환
+        eventResource.add(linkTo(EventController.class).withRel("query-events"));
+        eventResource.add(selfLinkBuilder.withRel("update-event")); // 셀프 링크와 메서드는 같지만 사용하는 메서드만 다름
         // createdUri 헤더를 가지고 201응답을 만듬
-        return ResponseEntity.created(createdUri).body(event);
+        return ResponseEntity.created(createdUri).body(eventResource);
     }
 }

@@ -52,13 +52,16 @@ public class EventControllerTests {
                     .accept(MediaTypes.HAL_JSON) //받고싶은 타입
                     .content(objectMapper.writeValueAsString(event))) //event를 json을 String으로 맵핑
                 .andDo(print())
-                .andExpect(status().isCreated()) // 201 상태인지 확인
+                .andExpect(status().isCreated()) // 201 상태인지 확 인
                 .andExpect(jsonPath("id").exists()) //ID가 있는지 확인
                 .andExpect(header().exists(HttpHeaders.LOCATION)) // HEADER에 Location 있는지 확인
                 .andExpect(header().string(HttpHeaders.CONTENT_TYPE, MediaTypes.HAL_JSON_UTF8_VALUE)) //Content-Type 값 확인
                 .andExpect(jsonPath("free").value(false)) // free가 false
                 .andExpect(jsonPath("offline").value(true))
                 .andExpect(jsonPath("eventStatus").value(EventStatus.DRAFT.name()))
+                .andExpect(jsonPath("_links.self").exists())
+                .andExpect(jsonPath("_links.query-events").exists())
+                .andExpect(jsonPath("_links.update-event").exists())
 
         ;
     }
