@@ -26,4 +26,12 @@ public class Event {
     private boolean free; //유료 여부
     @Enumerated(EnumType.STRING)
     private EventStatus eventStatus = EventStatus.DRAFT; // 이벤트 상태
+
+    //둘다 0이면 무료 아니면 무료
+    public void update() {
+        // Update free
+        this.free = this.basePrice == 0 && this.maxPrice == 0 ? true : false;
+        // Update offline
+        this.offline = this.location == null || this.location.isBlank() ? false : true;
+    }
 }

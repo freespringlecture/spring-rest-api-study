@@ -56,8 +56,8 @@ public class EventControllerTests {
                 .andExpect(jsonPath("id").exists()) //ID가 있는지 확인
                 .andExpect(header().exists(HttpHeaders.LOCATION)) // HEADER에 Location 있는지 확인
                 .andExpect(header().string(HttpHeaders.CONTENT_TYPE, MediaTypes.HAL_JSON_UTF8_VALUE)) //Content-Type 값 확인
-                .andExpect(jsonPath("id").value(Matchers.not(100))) // ID가 100이 아니면
-                .andExpect(jsonPath("free").value(Matchers.not(true))) // free가 true가
+                .andExpect(jsonPath("free").value(false)) // free가 false
+                .andExpect(jsonPath("offline").value(true))
                 .andExpect(jsonPath("eventStatus").value(EventStatus.DRAFT.name()))
 
         ;

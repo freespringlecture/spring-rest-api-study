@@ -42,6 +42,8 @@ public class EventController {
 
         //EventDto에 있는 것을 Event 타입의 인스턴스로 만들어 달라
         Event event = modelMapper.map(eventDto, Event.class);
+        //저장하기 전에 유료인지 무료인지 여부 업데이트
+        event.update();
         Event newEvent = this.eventRepository.save(event);
         //EventController의 id에 해당하는 링크를 만들고 링크를 URI로 변환
         //API에 events에 어떤 특정한 ID 그 ID가 생성된 이벤트에 Location Header에 들어감
