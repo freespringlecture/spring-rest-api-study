@@ -1,5 +1,6 @@
 package me.freelife.rest.events;
 
+import me.freelife.rest.common.ErrorsResource;
 import org.modelmapper.ModelMapper;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.MediaTypes;
@@ -21,9 +22,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 public class EventController {
 
     private final EventRepository eventRepository;
-
     private final ModelMapper modelMapper;
-
     private final EventValidator eventValidator;
 
     public EventController(EventRepository eventRepository, ModelMapper modelMapper, EventValidator eventValidator) {
@@ -35,11 +34,11 @@ public class EventController {
     @PostMapping
     public ResponseEntity createEvent(@RequestBody @Valid EventDto eventDto, Errors errors) {
         if(errors.hasErrors())
-            return ResponseEntity.badRequest().body(errors);
+            return badRequest(errors);
 
         eventValidator.validate(eventDto, errors);
         if(errors.hasErrors()) {
-            return ResponseEntity.badRequest().body(errors);
+            return badRequest(errors);
         }
 
         //EventDto에 있는 것을 Event 타입의 인스턴스로 만들어 달라
@@ -57,5 +56,9 @@ public class EventController {
         eventResource.add(new Link("/docs/index.html").withRel("profile"));
         // createdUri 헤더를 가지고 201응답을 만듬
         return ResponseEntity.created(createdUri).body(eventResource);
+    }
+
+    private ResponseEntity badRequest(Errors errors) {
+        return ResponseEntity.badRequest().body(new ErrorsResource(errors));
     }
 }
