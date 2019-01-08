@@ -2,8 +2,10 @@ package me.freelife.rest.configs;
 
 import me.freelife.rest.Application;
 import me.freelife.rest.accounts.Account;
+import me.freelife.rest.accounts.AccountRepository;
 import me.freelife.rest.accounts.AccountRole;
 import me.freelife.rest.accounts.AccountService;
+import me.freelife.rest.common.AppProperties;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
@@ -29,23 +31,31 @@ public class AppConfig {
     }
 
     //임의의 유저정보 생성
-    /*
     @Bean
     public ApplicationRunner applicationRunner() {
         return new ApplicationRunner() {
             @Autowired
             AccountService accountService;
 
+            @Autowired
+            AppProperties appProperties;
+
             @Override
             public void run(ApplicationArguments args) throws Exception {
-                Account freelife = Account.builder()
-                        .email("freelife@gmail.com")
-                        .password("freelife")
+                Account admin = Account.builder()
+                        .email(appProperties.getAdminUsername())
+                        .password(appProperties.getAdminPassword())
                         .roles(Set.of(AccountRole.ADMIN, AccountRole.USER))
                         .build();
-                accountService.saveAccount(freelife);
+                accountService.saveAccount(admin);
+
+                Account user = Account.builder()
+                        .email(appProperties.getUserUsername())
+                        .password(appProperties.getUserPassword())
+                        .roles(Set.of(AccountRole.USER))
+                        .build();
+                accountService.saveAccount(user);
             }
         };
     }
-    */
 }
