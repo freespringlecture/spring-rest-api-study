@@ -1,6 +1,7 @@
 package me.freelife.rest.events;
 
 import lombok.*;
+import me.freelife.rest.accounts.Account;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -26,6 +27,8 @@ public class Event {
     private boolean free; //유료 여부
     @Enumerated(EnumType.STRING)
     private EventStatus eventStatus = EventStatus.DRAFT; // 이벤트 상태
+    @ManyToOne
+    private Account manager; //account 관리자
 
     //둘다 0이면 무료 아니면 무료
     public void update() {
