@@ -53,6 +53,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring().requestMatchers(PathRequest.toStaticResources().atCommonLocations());
     }
 
+    /*
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -61,8 +62,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .formLogin() //폼 인증 사용
                 .and()
             .authorizeRequests() //허용할 요청
-                .mvcMatchers(HttpMethod.GET, "/api/**").authenticated()  //.anonymous() // /api/ 경로의 모든걸 익명사용자에게 허용
+                .mvcMatchers(HttpMethod.GET, "/api/**").permitAll()  //.anonymous() // /api/ 경로의 모든걸 익명사용자에게 허용
                 .anyRequest().authenticated(); // 나머지는 인증이 필요
-
     }
+    */
 }
