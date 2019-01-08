@@ -54,25 +54,6 @@ public class AccountServiceTest {
         assertThat(userDetails.getPassword()).isEqualTo(password);
     }
 
-    @Test(expected = UsernameNotFoundException.class)
-    @TestDescription("없는 사용자의 경우 UsernameNotFoundException 예외 발생")
-    public void findByUsernameFail_ExceptionType() {
-        String username = "random@email.com";
-        accountService.loadUserByUsername(username);
-    }
-
-    @Test
-    @TestDescription("없는 사용자의 경우 예외 타입과 메세지 확인")
-    public void findByUsernameFail_ExceptionTypeMessage() {
-        String username = "random@email.com";
-        try {
-            accountService.loadUserByUsername(username);
-            fail("supposed to be failed");
-        } catch (UsernameNotFoundException e) {
-            assertThat(e.getMessage()).containsSequence(username);
-        }
-    }
-
     @Test
     @TestDescription("없는 사용자의 경우 예상되는 예외로 타입과 메세지 확인")
     public void findByUsernameFail() {
