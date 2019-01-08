@@ -28,6 +28,8 @@ public class AppConfig {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 
+    //임의의 유저정보 생성
+    /*
     @Bean
     public ApplicationRunner applicationRunner() {
         return new ApplicationRunner() {
@@ -45,4 +47,5 @@ public class AppConfig {
             }
         };
     }
+    */
 }
