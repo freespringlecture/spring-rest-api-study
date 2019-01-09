@@ -1,7 +1,9 @@
 package me.freelife.rest.events;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.*;
 import me.freelife.rest.accounts.Account;
+import me.freelife.rest.accounts.AccountSerializer;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -28,6 +30,7 @@ public class Event {
     @Enumerated(EnumType.STRING)
     private EventStatus eventStatus = EventStatus.DRAFT; // 이벤트 상태
     @ManyToOne
+    @JsonSerialize(using = AccountSerializer.class)
     private Account manager; //account 관리자
 
     //둘다 0이면 무료 아니면 무료
