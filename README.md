@@ -9,7 +9,7 @@
 - Lombok
 
 ## 자바 버전 11로 시작
-- 자바는 여전히 무료다
+- [자바는 여전히 무료다](https://medium.com/@javachampions/java-is-still-free-c02aef8c9e04)
 
 ## 스프링 부트 핵심 원리
 - 의존성 설정 (pom.xml)
