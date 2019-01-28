@@ -16,8 +16,8 @@
 ## REST API 테스트 클라이언트 애플리케이션 
 ### 크롬 플러그인
 #### Restlet
-![Restlet](image/4-1.png)
+![Restlet](img/4-1.png)
 
 ### 애플리케이션
 #### Postman
-![Postman](image/4-2.png)
+![Postman](img/4-2.png)
