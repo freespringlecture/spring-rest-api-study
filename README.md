@@ -1,24 +1,23 @@
-# Event 생성 API 구현: 매개변수를 이용한 테스트
-## 테스트 코드 리팩토링
-- 테스트에서 중복 코드 제거
-- 매개변수만 바꿀 수 있으면 좋겠는데?
-- JUnitParams
-
-## JUnitParams
-https://github.com/Pragmatists/JUnitParams
-> 파라메터를 사용한 테스트 코드를 만들기 쉽게 해주는 라이브러리  
-> 원래 JUnit은 메서드 파라메터를 가질 수 없음  
-> 메서드 파라메터에 들어갈 값들을 정의하는 방법을 제공  
-```xml
-<dependency>
-    <groupId>pl.pragmatists</groupId>
-    <artifactId>JUnitParams</artifactId>
-    <version>1.1.1</version>
-    <scope>test</scope>
-</dependency>
-```
-
-#### @RunWith 설정
-```java
-@RunWith(JUnitParamsRunner.class)
-```
+# 스프링 HATEOAS 소개
+## 스프링 HATEOAS
+https://docs.spring.io/spring-hateoas/docs/current/reference/html/
+### 링크 만드는 기능
+- 문자열 가지고 만들기
+- 컨트롤러와 메소드로 만들기
+### 리소스 만드는 기능
+- 리소스: 데이터 + 링크
+### 링크 찾아주는 기능
+> 사용자 입장에서 링크를 가져와서 쉽게 사용할 수 있는 기능  
+- Traverson
+- LinkDiscoverers
+### 링크
+> 링크 자체에 어떠한 메서드를 사용해야 한다를 현재 설정할 수는 없음  
+- HREF(Hyper Media Reference): URI나 URL 설정
+- REL(Relation): 현재 이 소스와의 관계
+  - self: 자기자신의 URL
+  - profile: 현재 이 응답본문에 대한 설명을 가지고 있는 문서로 링크
+  - update-event: 이벤트를 수정할 수 있는 업데이트
+  - query-events: 이벤트를 조회할 수 있는 링크
+  
+<img src="img/3-1.png" width="300">
+  
