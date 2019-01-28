@@ -1,27 +1,47 @@
-# 스프링 기반 REST API 개발
-이번 강좌에서는 다양한 스프링 기술을 사용하여 Self-Describtive Message와 HATEOAS(Hypermedia as the engine of application state)를 만족하는 REST API를 개발합니다  
+# REST API 
+## API
+> **A**pplication ​**P**rogramming ​**I**nterface  
 
-이응준님께서 2017년 네이버가 주관한 Deview라는 개발자 컨퍼런스에서 ['그런 REST API로 괜찮은가​’](https://deview.kr/2017/schedule/212?lang=ko)라는 발표를 했습니다. 발표의 핵심은 현재 REST API로 불리우는 대부분의 API가 실제로는 로이 필딩이 정의한 REST를 따르고 있지 않으며, 그 중에서도 특히 Self-Describtive Message와 HATEOAS가 지켜지고 있지 않음을 지적했고 그에 대한 대안을 제시했습니다  
+## REST
+- **RE**presentational ​**S**tate ​**T**r​​ ansfer
+- 인터넷 상의 시스템 간의 상호 운용성(interoperability)을 제공하는 방법중 하나
+- 시스템 제각각의 ​독립적인​​ ​진화​​를 보장하기 위한 방법
+- REST API: REST 아키텍처 스타일을 따르는 API
 
-이번 강좌는 해당 발표에 영감을 받아 만들었으며, KSUG에서 동일한 이름으로 2018년 11월 세미나를 진행한 경험이 있습니다. 4시간이라는 짧지 않은 발표였지만, 준비한 내용에 비해 시간이 부족할 수 있었기 때문에 진행을 빨리 하느라 충분히 설명하지 못하고 넘어갔던 부분을 이번 강좌에서 보충하고 또 해결하려는 문제에 대한 여러 선택지를 제공하는 것이 좋을것 같아 강좌를 만들었습니다  
+## 그런 REST API로 괜찮은가
+[발표 영상](https://www.youtube.com/watch?v=RP_f5dMoHFc) 37분 50초)
+
+## REST 아키텍처 스타일 (​발표 영상 ​11분)
+- Client-Server
+- Stateless
+- Cache
+- Uniform Interface
+- Layered System
+- Code-On-Demand (optional)
+
+## Uniform Interface (발표 영상 11분 40초)
+- Identification of resources
+- manipulation of resources through represenations
+- **self-descrive messages**
+- **hypermisa as the engine of appliaction state (HATEOAS)**
+
+## 두 문제를 좀 더 자세히 살펴보자
+
+### Self-descriptive message
+- 메시지 스스로 메시지에 대한 설명이 가능해야 한다
+- 서버가 변해서 메시지가 변해도 클라이언트는 그 메시지를 보고 해석이 가능하다
+- **확장 가능한 커뮤니케이션**
+### HATEOAS
+- 하이퍼미디어(링크)를 통해 애플리케이션 상태 변화가 가능해야 한다
+- **링크 정보를 동적으로 바꿀 수 있다**​ (Versioning 할 필요 없이!)
+
+## Self-descriptive message 해결 방법
+- 방법1: 미디어 타입을 정의하고 IANA에 등록하고 그 미디어 타입을 리소스 리턴할 때 Content-Type으로 사용한다
+- **방법 2: profile 링크 헤더 를 추가한다 (발표 영상 41분 50초)**
+  - [브라우저들이 아직 스팩 지원을 잘 안해](http://test.greenbytes.de/tech/tc/httplink/)
+  - 대안으로 ​[HAL​](http://stateless.co/hal_specification.html)의 링크 데이터에 ​[profile 링크]​(https://tools.ietf.org/html/draft-wilde-profile-link-04) 추가
   
-그리고 제가 주로 사용하는 인텔리J 단축키 역시 코딩하는 중에 설명합니다  
-
-> 이번 강좌에서는 다음의 다양한 스프링 기술을 사용하여 REST API를 개발합니다  
-- 스프링 프레임워크
-- 스프링부트
-- 스프링 데이터 JPA
-- 스프링 HATEOAS
-- 스프링 REST Docs
-- 스프링 시큐리티 OAuth2
---------------
-또한 개발은 테스트 주도 개발(TDD)로 진행하기 때문에 평소 테스트 또는 TDD에 관심있던 개발자에게도 이번 강좌가 도움이 될 것으로 기대합니다  
-## 사전 학습
-- 스프링 프레임워크 핵심 기술 (필수)
-- 스프링 부트 개념과 활용 (필수)
-- 스프링 데이터 JPA (선택)
-## 학습 목표
-- Self-Describtive Message와 HATEOAS를 만족하는 REST API를 이해합니다
-- 다양한 스프링 기술을 활용하여 REST API를 개발할 수 있습니다
-- 스프링 HATEOAS와 스프링 REST Docs 프로젝트를 활용할 수 있습니다
-- 테스트 주도 개발(TDD)에 익숙해 집니다
+## HATEOAS 해결 방법
+- 방법1: 데이터에 링크 제공
+  - **링크를 어떻게 정의할 것인가? HAL**
+- 방법2: 링크 헤더나 Location을 제공
