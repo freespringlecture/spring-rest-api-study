@@ -1,30 +1,23 @@
-# Event REST API
-> 이벤트 등록, 조회 및 수정 API
+# Events API 사용 예제
 
-## GET /api/events
-### 이벤트 목록 조회 REST API (로그인 안 한 상태)
-- 응답에 보여줘야 할 데이터
-  - 이벤트목록
-  - 링크
-    - self
-    - profile: 이벤트 목록 조회 API ​**문서**​​로 링크
-    - get-an-event: 이벤트 하나 조회하는 API 링크
-    - next: 다음 페이지 (optional)
-    - prev: 이전 페이지 (optional)
-- 응답에 보여줘야 할 데이터
-  - 이벤트목록
-  - 링크
-    - self
-    - profile: 이벤트 목록 조회 API ​**문서**로 링크
-    - get-an-event: 이벤트 하나 조회하는 API 링크
-    - **create-new-event: 이벤트를 생성할 수 있는 API 링크**
-    - next: 다음 페이지 (optional)
-    - prev: 이전 페이지 (optional)
-- 로그인 한 상태???? (stateless라며..)
-  - 아니, 사실은 Bearer 헤더에 유효한 AccessToken이 들어있는 경우!
+1. (토큰 없이) 이벤트 목록 조회 a. create 안 보임
+2. access token 발급 받기 (A 사용자 로그인)
+3. (유효한A토큰가지고)이벤트목록조회
+  - create event 보임
+4. (유효한 A 토큰 가지고) 이벤트 만들기
+5. (토큰 없이) 이벤트 조회
+  - update 링크 안 보임
+6. (유효한 A 토큰 가지고) 이벤트 조회
+   - update 링크 보임
+7. access token 발급 받기 (B 사용자 로그인)
+8. (유효한 B 토큰 가지고) 이벤트 조회
+   - update 안 보임
 
-## POST /api/events
-- 이벤트생성 GET /api/events/{id}
-- 이벤트 하나 조회
-## PUT /api/events/{id}
-- 이벤트수정
+## REST API 테스트 클라이언트 애플리케이션 
+### 크롬 플러그인
+#### Restlet
+![Restlet](image/4-1.png)
+
+### 애플리케이션
+#### Postman
+![Postman](image/4-2.png)
