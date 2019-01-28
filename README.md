@@ -1,4 +1,4 @@
-# 이벤트 Repository
+# Event 생성 API 구현: EventRepository 구현
 ## 스프링 데이터 JPA
 - JpaRepository 상속 받아 만들기
 
