@@ -1,4 +1,4 @@
-# 201 응답 받기
+# Event 생성 API 구현: 201 응답 받기
 ## @RestController
 > @ResponseBody를 모든 메소드에 적용한 것과 동일하다  
 ## ResponseEntity를 사용하는 이유
