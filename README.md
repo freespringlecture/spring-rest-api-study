@@ -1,23 +1,33 @@
-# Events API 사용 예제
+# 스프링 부트 프로젝트 만들기
+## 추가할 의존성
+- Web
+- JPA
+- HATEOAS
+- REST Docs
+- H2
+- PostgreSQL
+- Lombok
 
-1. (토큰 없이) 이벤트 목록 조회 a. create 안 보임
-2. access token 발급 받기 (A 사용자 로그인)
-3. (유효한A토큰가지고)이벤트목록조회
-  - create event 보임
-4. (유효한 A 토큰 가지고) 이벤트 만들기
-5. (토큰 없이) 이벤트 조회
-  - update 링크 안 보임
-6. (유효한 A 토큰 가지고) 이벤트 조회
-   - update 링크 보임
-7. access token 발급 받기 (B 사용자 로그인)
-8. (유효한 B 토큰 가지고) 이벤트 조회
-   - update 안 보임
+## 자바 버전 11로 시작
+- 자바는 여전히 무료다
 
-## REST API 테스트 클라이언트 애플리케이션 
-### 크롬 플러그인
-#### Restlet
-![Restlet](image/4-1.png)
+## 스프링 부트 핵심 원리
+- 의존성 설정 (pom.xml)
+- 자동 설정 (@EnableAutoConfiguration)
+- 내장웹서버(의존성과자동설정의일부)
+- 독립적으로 실행 가능한 JAR (pom.xml의 플러그인)
 
-### 애플리케이션
-#### Postman
-![Postman](image/4-2.png)
+- default 는 compile scope
+- `<optional>` 프로젝트를 참조하고 있는 다른 프로젝트에 추이적으로 의존성이 추가되지 않음
+
+### Lombok 의존성 추가
+```xml
+<dependency>
+    <groupId>org.projectlombok</groupId>
+    <artifactId>lombok</artifactId>
+    <optional>true</optional>
+</dependency>
+```
+  
+> 최초 실행 시 scope를 테스트라고 해두면 테스트 시에만 사용 Application 실행 시 postgresql로 실행하므로 오류가 남  
+> 런타임시 별다른 데이터베이스 설정이 없는경우 In-memory DB인 H2를 기본을 설정하게 되어있음  
