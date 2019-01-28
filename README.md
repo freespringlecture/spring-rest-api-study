@@ -1,47 +1,30 @@
-# REST API 
-## API
-> **A**pplication ​**P**rogramming ​**I**nterface  
+# Event REST API
+> 이벤트 등록, 조회 및 수정 API
 
-## REST
-- **RE**presentational ​**S**tate ​**T**r​​ ansfer
-- 인터넷 상의 시스템 간의 상호 운용성(interoperability)을 제공하는 방법중 하나
-- 시스템 제각각의 ​독립적인​​ ​진화​​를 보장하기 위한 방법
-- REST API: REST 아키텍처 스타일을 따르는 API
+## GET /api/events
+### 이벤트 목록 조회 REST API (로그인 안 한 상태)
+- 응답에 보여줘야 할 데이터
+  - 이벤트목록
+  - 링크
+    - self
+    - profile: 이벤트 목록 조회 API ​**문서**​​로 링크
+    - get-an-event: 이벤트 하나 조회하는 API 링크
+    - next: 다음 페이지 (optional)
+    - prev: 이전 페이지 (optional)
+- 응답에 보여줘야 할 데이터
+  - 이벤트목록
+  - 링크
+    - self
+    - profile: 이벤트 목록 조회 API ​**문서**로 링크
+    - get-an-event: 이벤트 하나 조회하는 API 링크
+    - **create-new-event: 이벤트를 생성할 수 있는 API 링크**
+    - next: 다음 페이지 (optional)
+    - prev: 이전 페이지 (optional)
+- 로그인 한 상태???? (stateless라며..)
+  - 아니, 사실은 Bearer 헤더에 유효한 AccessToken이 들어있는 경우!
 
-## 그런 REST API로 괜찮은가
-[발표 영상](https://www.youtube.com/watch?v=RP_f5dMoHFc) 37분 50초)
-
-## REST 아키텍처 스타일 (​발표 영상 ​11분)
-- Client-Server
-- Stateless
-- Cache
-- Uniform Interface
-- Layered System
-- Code-On-Demand (optional)
-
-## Uniform Interface (발표 영상 11분 40초)
-- Identification of resources
-- manipulation of resources through represenations
-- **self-descrive messages**
-- **hypermisa as the engine of appliaction state (HATEOAS)**
-
-## 두 문제를 좀 더 자세히 살펴보자
-
-### Self-descriptive message
-- 메시지 스스로 메시지에 대한 설명이 가능해야 한다
-- 서버가 변해서 메시지가 변해도 클라이언트는 그 메시지를 보고 해석이 가능하다
-- **확장 가능한 커뮤니케이션**
-### HATEOAS
-- 하이퍼미디어(링크)를 통해 애플리케이션 상태 변화가 가능해야 한다
-- **링크 정보를 동적으로 바꿀 수 있다**​ (Versioning 할 필요 없이!)
-
-## Self-descriptive message 해결 방법
-- 방법1: 미디어 타입을 정의하고 IANA에 등록하고 그 미디어 타입을 리소스 리턴할 때 Content-Type으로 사용한다
-- **방법 2: profile 링크 헤더 를 추가한다 (발표 영상 41분 50초)**
-  - [브라우저들이 아직 스팩 지원을 잘 안해](http://test.greenbytes.de/tech/tc/httplink/)
-  - 대안으로 ​[HAL​](http://stateless.co/hal_specification.html)의 링크 데이터에 ​[profile 링크]​(https://tools.ietf.org/html/draft-wilde-profile-link-04) 추가
-  
-## HATEOAS 해결 방법
-- 방법1: 데이터에 링크 제공
-  - **링크를 어떻게 정의할 것인가? HAL**
-- 방법2: 링크 헤더나 Location을 제공
+## POST /api/events
+- 이벤트생성 GET /api/events/{id}
+- 이벤트 하나 조회
+## PUT /api/events/{id}
+- 이벤트수정
