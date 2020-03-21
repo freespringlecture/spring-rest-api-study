@@ -100,6 +100,7 @@ public class EventControllerTests {
                         ),
                         responseFields( //응답 본문 문서화
                                 fieldWithPath("id").description("identifier of new event"),
+                                fieldWithPath("name").description("Name of new event"),
                                 fieldWithPath("description").description("date time of begin of new event"),
                                 fieldWithPath("beginEnrollmentDateTime").description("date time of begin of new event"),
                                 fieldWithPath("closeEnrollmentDateTime").description("date time of close of new event"),
