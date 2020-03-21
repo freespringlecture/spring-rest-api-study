@@ -1,5 +1,5 @@
 = REST API Guide
-작성자 수정;
+프리라이프;
 :doctype: book
 :icons: font
 :source-highlighter: highlightjs
