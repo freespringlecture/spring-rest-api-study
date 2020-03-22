@@ -1,7 +1,7 @@
 # 이벤트 API 점검
 
 ## ResourceServerConfig Authentication 수정
-> GET /api/** 요청에 대해 `anonymous` 에게만 허용하겠다는 옵션을 `permitAll` 모두에게 허용하는 옵션으로 변경  
+`GET /api/**` 요청에 대해 `anonymous` 에게만 허용하겠다는 옵션을 `permitAll` 모두에게 허용하는 옵션으로 변경  
 ```java
 @Override
 public void configure(HttpSecurity http) throws Exception {
