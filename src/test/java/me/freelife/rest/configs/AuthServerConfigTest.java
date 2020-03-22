@@ -2,7 +2,7 @@ package me.freelife.rest.configs;
 
 import me.freelife.rest.accounts.AccountService;
 import me.freelife.rest.common.AppProperties;
-import me.freelife.rest.common.BaseControllerTest;
+import me.freelife.rest.common.BaseTest;
 import me.freelife.rest.common.TestDescription;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-public class AuthServerConfigTest extends BaseControllerTest {
+public class AuthServerConfigTest extends BaseTest {
 
     @Autowired
     AccountService accountService;

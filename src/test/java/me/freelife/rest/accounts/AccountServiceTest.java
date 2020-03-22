@@ -1,5 +1,6 @@
 package me.freelife.rest.accounts;
 
+import me.freelife.rest.common.BaseTest;
 import me.freelife.rest.common.TestDescription;
 import org.hamcrest.Matchers;
 import org.junit.Rule;
@@ -19,10 +20,7 @@ import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
-@ActiveProfiles("test")
-public class AccountServiceTest {
+public class AccountServiceTest extends BaseTest {
 
     @Rule
     public ExpectedException expectedException = ExpectedException.none();
