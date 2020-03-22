@@ -64,7 +64,7 @@ grant_type=password
 ## 테스트 작성
 기본으로 **OAuth2** 서버가 등록이 되면 `/oauth/token`을 요청할 수 있는 핸들러가 적용이 됨  
 
-#### HttpBasic를 사용하기 위해 spring-security-test 의존성 추가
+### HttpBasic를 사용하기 위해 spring-security-test 의존성 추가
 ```xml
 <dependency>
     <groupId>org.springframework.security</groupId>
@@ -74,7 +74,7 @@ grant_type=password
 </dependency>
 ```
 
-#### 테스트 코드 작성
+### 테스트 코드 작성
 **HttpBasic**를 사용하기 위해선 **clientId**와 **clientSecret** 가 필요함  
 ```java
 package me.freelife.rest.configs;
@@ -128,7 +128,7 @@ public class AuthServerConfigTest extends BaseControllerTest {
 }
 ```
 
-#### AuthServerConfig 클래스 생성
+### AuthServerConfig 클래스 생성
 ```java
 package me.freelife.rest.configs;
 
