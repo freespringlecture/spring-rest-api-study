@@ -9,7 +9,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PagedResourcesAssembler;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.MediaTypes;
-import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -22,10 +21,10 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.util.Optional;
 
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
 @Controller
-@RequestMapping(value = "/api/events", produces = MediaTypes.HAL_JSON_UTF8_VALUE)
+@RequestMapping(value = "/api/events", produces = MediaTypes.HAL_JSON_VALUE)
 public class EventController {
 
     private final EventRepository eventRepository;
@@ -61,7 +60,7 @@ public class EventController {
         Event newEvent = this.eventRepository.save(event);
         //EventController의 id에 해당하는 링크를 만들고 링크를 URI로 변환
         //API에 events에 어떤 특정한 ID 그 ID가 생성된 이벤트에 Location Header에 들어감
-        ControllerLinkBuilder selfLinkBuilder = linkTo(EventController.class).slash(newEvent.getId());
+        var selfLinkBuilder = linkTo(EventController.class).slash(newEvent.getId());
         URI createdUri = selfLinkBuilder.toUri();
         EventResource eventResource = new EventResource(event); //이벤트를 이벤트리소스로 변환
         eventResource.add(linkTo(EventController.class).withRel("query-events"));
@@ -83,7 +82,7 @@ public class EventController {
         Authentication  authentication = SecurityContextHolder.getContext().getAuthentication();
 
         Page<Event> page = this.eventRepository.findAll(pageable);
-        var pagedResources = assembler.toResource(page, e -> new EventResource(e));
+        var pagedResources = assembler.toModel(page, e -> new EventResource(e));
         //profile로 가는 Link를 추가
         pagedResources.add(new Link("/docs/index.html#resources-events-list").withRel("profile"));
         if(account != null) {

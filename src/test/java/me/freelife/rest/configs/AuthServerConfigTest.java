@@ -3,8 +3,8 @@ package me.freelife.rest.configs;
 import me.freelife.rest.accounts.AccountService;
 import me.freelife.rest.common.AppProperties;
 import me.freelife.rest.common.BaseTest;
-import me.freelife.rest.common.TestDescription;
-import org.junit.Test;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.httpBasic;
@@ -22,7 +22,7 @@ public class AuthServerConfigTest extends BaseTest {
     AppProperties appProperties;
 
     @Test
-    @TestDescription("인증 토큰을 발급 받는 테스트")
+    @DisplayName("인증 토큰을 발급 받는 테스트")
     public void getAuthToken() throws Exception {
         this.mockMvc.perform(post("/oauth/token")
                 .with(httpBasic(appProperties.getClientId(), appProperties.getClientSecret())) // Basic OAuth Header

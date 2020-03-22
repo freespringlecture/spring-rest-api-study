@@ -1,7 +1,7 @@
 package me.freelife.rest.index;
 
 import me.freelife.rest.common.BaseTest;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;

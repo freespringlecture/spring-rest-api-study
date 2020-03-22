@@ -1,14 +1,14 @@
 package me.freelife.rest.events;
 
+import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.Link;
-import org.springframework.hateoas.Resource;
 
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
 /**
  * 스프링 HATEOAS를 사용해 이벤트를 이벤트리소스로 변환하여 리소스를 만들어서 밖으로 내보내줌
  */
-public class EventResource extends Resource<Event> {
+public class EventResource extends EntityModel<Event> {
 
     public EventResource(Event event, Link... links) {
         super(event, links);

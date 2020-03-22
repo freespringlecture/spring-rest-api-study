@@ -1,29 +1,20 @@
 package me.freelife.rest.accounts;
 
 import me.freelife.rest.common.BaseTest;
-import me.freelife.rest.common.TestDescription;
-import org.hamcrest.Matchers;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class AccountServiceTest extends BaseTest {
-
-    @Rule
-    public ExpectedException expectedException = ExpectedException.none();
 
     @Autowired
     AccountService accountService;
@@ -32,7 +23,7 @@ public class AccountServiceTest extends BaseTest {
     PasswordEncoder passwordEncoder;
 
     @Test
-    @TestDescription("유저 인증 테스트")
+    @DisplayName("유저 인증 테스트")
     public void findByUsername() {
         // Given
         String password = "freelife";
@@ -53,15 +44,9 @@ public class AccountServiceTest extends BaseTest {
     }
 
     @Test
-    @TestDescription("없는 사용자의 경우 예상되는 예외로 타입과 메세지 확인")
+    @DisplayName("없는 사용자의 경우 예상되는 예외로 타입과 메세지 확인")
     public void findByUsernameFail() {
-        // Expected
-        String username = "random@email.com";
-        expectedException.expect(UsernameNotFoundException.class);
-        expectedException.expectMessage(Matchers.containsString(username));
-
-        // When
-        accountService.loadUserByUsername(username);
+        assertThrows(UsernameNotFoundException.class, () -> accountService.loadUserByUsername("random@email.com"));
     }
 
 }
