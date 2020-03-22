@@ -21,6 +21,10 @@ https://spring.io/projects/spring-boot
 -	**MediaTypes** 중에 (**UTF8**)인코딩이 들어간 상수 제거.
 
 ## JUnit 5
+https://junit.org/junit5/docs/current/user-guide/
+
+https://www.baeldung.com/junit-5
+
 -	`org.junit` -> `org.junit.jupiter`
 -	`@Ignore` -> `@Disabled`
 -	`@Before`, `@After` -> `@BeforeEach`, `@AfterEach`
@@ -316,6 +320,8 @@ public class AccountServiceTest extends BaseTest {
 - **MediaTypes.HAL_JSON_UTF8_VALUE** -> **MediaTypes.HAL_JSON_VALUE** 변경
 
 ### EventTest
+https://www.baeldung.com/parameterized-tests-junit-5
+
 **junit 5**의 `@ParameterizedTest`를 사용하도록 변경 기존 **JUnitParams** 라이브러리와 코드 제거
 `@MethodSource`에 파라메터 메서드를 셋팅해서 테스트
 
