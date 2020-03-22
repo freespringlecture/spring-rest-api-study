@@ -63,6 +63,7 @@ private Event generateEvent(int index) {
     return this.eventRepository.save(event);
 }
 ```
+
 ### 해결방법
 `updateEvent()` 수행시 **Account**를 신규로 생성해서 **Event** 생성 메서드에 **account** 파라메터를 넘겨 
 **Manager**를 셋팅해서 저장하도록 수정
@@ -75,6 +76,7 @@ private Event generateEvent(int index) {
 - `generateEvent` 메서드가 **account** 파라메터를 추가로 받으면 **Manager**에 파라메터로 받은 **account**를 셋팅해서 저장
   **index** 파라메터만 받는다면 기존과 동일하게 **event** 객체를 저장
 - `generateEvent`에 포함되어있던 **Event Builder** 를 `buildEvent`로 리팩토링
+
 ```java
 // 오버로딩하여 파라메터를 받지 않으면 getAccessToken에 true를 기본 파라메터로 전달
 private String getBearerToken() throws Exception {
@@ -171,6 +173,7 @@ public void getEvent() throws Exception {
 
 }
 ```
+
 ### 해결방법 및 소스코드
 **createAccount()**를 수행하여 생성한 **account**를 `generateEvent`에 추가로 파라메터 전달
 
@@ -203,6 +206,7 @@ public class ApplicationTests {
 
 }
 ```
+
 ### 해결방법 및 소스코드
 `@ActiveProfiles("test")` 어노테이션을 추가해서 `application-test.properties` 파일에서 설정을 읽어 오도록 수정하면 테스트가 성공한다
 ```java
