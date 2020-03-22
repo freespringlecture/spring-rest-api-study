@@ -217,3 +217,9 @@ public class ApplicationTests {
 
 }
 ```
+
+## BaseControllerTest -> BaseTest 로 클래스명 정정
+
+```java
+public class BaseTest {
+```
